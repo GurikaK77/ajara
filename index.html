@@ -4,7 +4,12 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>აჭარა — ვიკი-გზამკვლევი</title>
-  <meta name="description" content="აჭარის ისტორია, გეოგრაფია და ძეგლები - ინტერაქტიული გზამკვლევი." />
+  <meta name="description" content="აჭარის ისტორია, გეოგრაფია და ძეგლები - ინტერაქტიული PWA გზამკვლევი." />
+  
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#006064" />
+  <link rel="apple-touch-icon" href="icon-192.png">
+
   <style>
     /* --- ძირითადი ცვლადები და რესეტი --- */
     :root {
@@ -17,7 +22,7 @@
       --text-muted: #64748b;
       --radius: 16px;
       --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-      --font-main: 'Helvetica Neue', Arial, sans-serif; /* სისტემური ფონტები სწრაფი ჩატვირთვისთვის */
+      --font-main: 'Helvetica Neue', Arial, sans-serif;
     }
 
     * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -223,7 +228,6 @@
     .modal-body { font-size: 1rem; color: #334155; line-height: 1.7; }
     .modal-body strong { color: var(--primary); }
     
-    /* სქროლის სტილი მოდალისთვის */
     .modal-content::-webkit-scrollbar { width: 8px; }
     .modal-content::-webkit-scrollbar-track { background: #f1f1f1; }
     .modal-content::-webkit-scrollbar-thumb { background: #ccc; border-radius: 4px; }
@@ -360,7 +364,16 @@
   </div>
 
   <script>
-    // ვიკიპედიიდან დამუშავებული რეალური მონაცემები
+    // --- Service Worker-ის რეგისტრაცია (PWA) ---
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+          .then(reg => console.log('SW Registered!', reg))
+          .catch(err => console.log('SW Registration Failed', err));
+      });
+    }
+
+    // --- მონაცემები და ფუნქციონალი ---
     const wikiData = {
       etymology: `
         <p>სახელწოდება <strong>„აჭარა“</strong> წყაროებში VII საუკუნიდან გვხვდება. არსებობს მოსაზრება, რომ იგი უკავშირდება გეოგრაფიულ სახელ „აჭი“-ს.</p>
@@ -389,16 +402,12 @@
       `
     };
 
-    // მოდალის ლოგიკა
     const modal = document.getElementById('modalOverlay');
     const modalTitle = document.getElementById('modalTitle');
     const modalBody = document.getElementById('modalBody');
 
     function openModal(key) {
-      // ამოვიღოთ ინფორმაცია მონაცემთა ბაზიდან
       const content = wikiData[key];
-      
-      // სათაურის დაყენება (შესაბამისი გასაღების მიხედვით)
       let titleText = "";
       switch(key) {
         case 'etymology': titleText = "ეტიმოლოგია"; break;
@@ -412,18 +421,15 @@
 
       modalTitle.innerText = titleText;
       modalBody.innerHTML = content || "<p>ინფორმაცია არ მოიძებნა.</p>";
-      
-      // მოდალის გამოჩენა
       modal.classList.add('active');
-      document.body.style.overflow = 'hidden'; // სქროლის გათიშვა უკანა ფონზე
+      document.body.style.overflow = 'hidden';
     }
 
     function closeModal() {
       modal.classList.remove('active');
-      document.body.style.overflow = ''; // სქროლის დაბრუნება
+      document.body.style.overflow = '';
     }
 
-    // მოდალის დახურვა გარეთ დაწკაპუნებით
     modal.addEventListener('click', (e) => {
       if (e.target === modal) {
         closeModal();
