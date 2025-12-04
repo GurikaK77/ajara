@@ -2,191 +2,432 @@
 <html lang="ka">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>აჭარა — ზოგადი ინფორმაცია, ისტორია და ისტორიული ძეგლები</title>
-  <meta name="description" content="აჭარის მოკლე სახელმძღვანელო: ეტიმოლოგია, მხარის აღწერა, ისტორია, სოფლის მეურნეობა, მოსახლეობა და ისტორიული ძეგლები (წყარო: ვიკიპედია)." />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>აჭარა — ვიკი-გზამკვლევი</title>
+  <meta name="description" content="აჭარის ისტორია, გეოგრაფია და ძეგლები - ინტერაქტიული გზამკვლევი." />
   <style>
-    :root{--accent:#0a6b6b;--muted:#6b7280;--bg:#f7fafc;--card:#ffffff;--radius:14px;font-family: 'Noto Sans', Roboto, system-ui, -apple-system, sans-serif}
-    *{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,#f4fbfb,#ffffff);color:#0b1320}
-    .container{max-width:1100px;margin:0 auto;padding:18px}
-    header{position:sticky;top:0;background:rgba(255,255,255,0.7);backdrop-filter:blur(6px);border-bottom:1px solid rgba(0,0,0,0.06);z-index:40}
-    .nav{display:flex;align-items:center;justify-content:space-between;gap:12px}
-    .brand{display:flex;align-items:center;gap:12px}
-    .logo{width:46px;height:46px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#2aa4a4);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700}
-    nav ul{display:flex;gap:16px;list-style:none;margin:0;padding:0}
-    nav a{color:inherit;text-decoration:none;font-weight:600}
-    .cta{background:var(--accent);color:white;padding:8px 12px;border-radius:10px;font-weight:700}
+    /* --- ძირითადი ცვლადები და რესეტი --- */
+    :root {
+      --primary: #006064; /* ღრმა ზღვისფერი */
+      --primary-light: #00838f;
+      --accent: #ff6f00; /* კონტრასტული ნარინჯისფერი */
+      --bg-body: #f0f4f8;
+      --bg-card: #ffffff;
+      --text-main: #1f2937;
+      --text-muted: #64748b;
+      --radius: 16px;
+      --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      --font-main: 'Helvetica Neue', Arial, sans-serif; /* სისტემური ფონტები სწრაფი ჩატვირთვისთვის */
+    }
 
-    .burger{display:none;border:0;background:none;padding:8px}
-    .mobile-menu{display:none;position:fixed;right:14px;top:70px;background:var(--card);padding:14px;border-radius:12px;box-shadow:0 10px 30px rgba(2,6,23,0.12)}
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      font-family: var(--font-main);
+      line-height: 1.6;
+    }
 
-    .hero{display:grid;grid-template-columns:1fr 380px;gap:24px;padding:34px 0}
-    h1{margin:0;font-size:clamp(20px,4vw,34px)}
-    h2{margin-top:0}
-    .muted{color:var(--muted)}
+    /* --- კონტეინერი --- */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
 
-    section{padding:26px 0;border-bottom:1px solid rgba(10,20,20,0.02)}
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-    .card{background:var(--card);padding:16px;border-radius:12px;box-shadow:0 8px 28px rgba(12,20,34,0.04)}
+    /* --- ჰედერი --- */
+    header {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      padding: 15px 0;
+    }
+    .nav-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--primary);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo span {
+      background: var(--primary);
+      color: white;
+      padding: 4px 10px;
+      border-radius: 8px;
+    }
 
-    .landmarks{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:12px}
-    .landmark{display:flex;gap:12px;align-items:flex-start}
-    .landmark img{width:120px;height:80px;object-fit:cover;border-radius:8px}
+    /* --- Hero სექცია --- */
+    .hero {
+      text-align: center;
+      padding: 60px 20px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: white;
+      border-radius: 0 0 40px 40px;
+      margin-bottom: 40px;
+      box-shadow: var(--shadow);
+    }
+    .hero h1 { margin: 0 0 15px; font-size: clamp(1.8rem, 5vw, 3rem); }
+    .hero p { opacity: 0.9; max-width: 600px; margin: 0 auto; font-size: 1.1rem; }
 
-    footer{padding:20px 0;text-align:center;color:var(--muted)}
+    /* --- ბარათების გრიდი --- */
+    .section-title {
+      text-align: center;
+      margin-bottom: 30px;
+      color: var(--primary);
+      font-size: 1.8rem;
+    }
 
-    @media(max-width:960px){.hero{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,1fr)}.landmarks{grid-template-columns:1fr}}
-    @media(max-width:600px){nav ul{display:none}.burger{display:block}.mobile-menu.open{display:block}.grid{grid-template-columns:1fr}}
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+      margin-bottom: 60px;
+    }
 
-    .small{font-size:0.95rem;color:var(--muted)}
+    .card {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 25px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 1px solid rgba(0,0,0,0.02);
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+
+    .card-icon {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      background: #e0f7fa;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      color: var(--primary);
+    }
+
+    .card h3 { margin: 0 0 10px; font-size: 1.4rem; color: var(--text-main); }
+    .card p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px; flex-grow: 1; }
+
+    /* --- ღილაკები --- */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--bg-body);
+      color: var(--primary);
+      padding: 12px 20px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 700;
+      transition: all 0.2s;
+      border: 1px solid transparent;
+      cursor: pointer;
+      width: 100%; /* მობილურზე სრული სიგანე */
+    }
+
+    .btn:hover {
+      background: #e0f2f1;
+      transform: scale(1.02);
+    }
+
+    .btn-primary {
+      background: linear-gradient(90deg, var(--primary), var(--primary-light));
+      color: white;
+      box-shadow: 0 4px 12px rgba(0, 96, 100, 0.3);
+    }
+    .btn-primary:hover {
+      background: linear-gradient(90deg, var(--primary-light), var(--primary));
+      box-shadow: 0 6px 16px rgba(0, 96, 100, 0.4);
+    }
+
+    /* --- MODAL (ფანჯარა) --- */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      padding: 20px;
+      backdrop-filter: blur(4px);
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal-content {
+      background: white;
+      width: 100%;
+      max-width: 600px;
+      max-height: 85vh;
+      border-radius: 20px;
+      overflow-y: auto;
+      padding: 30px;
+      position: relative;
+      transform: translateY(20px);
+      transition: transform 0.3s ease;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    }
+
+    .modal-overlay.active .modal-content {
+      transform: translateY(0);
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: #f1f5f9;
+      border: none;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-header h2 { margin-top: 0; color: var(--primary); }
+    .modal-body { font-size: 1rem; color: #334155; line-height: 1.7; }
+    .modal-body strong { color: var(--primary); }
+    
+    /* სქროლის სტილი მოდალისთვის */
+    .modal-content::-webkit-scrollbar { width: 8px; }
+    .modal-content::-webkit-scrollbar-track { background: #f1f1f1; }
+    .modal-content::-webkit-scrollbar-thumb { background: #ccc; border-radius: 4px; }
+
+    /* --- Footer --- */
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      background: #fff;
+      color: var(--text-muted);
+      border-top: 1px solid rgba(0,0,0,0.05);
+      margin-top: 40px;
+    }
+
+    /* --- მობილურის სპეციფიკა --- */
+    @media (max-width: 600px) {
+      .hero { border-radius: 0 0 25px 25px; padding: 40px 20px; }
+      .grid { grid-template-columns: 1fr; gap: 20px; }
+      .card { padding: 20px; }
+      .section-title { font-size: 1.5rem; text-align: left; padding-left: 10px; border-left: 4px solid var(--accent); }
+    }
   </style>
 </head>
 <body>
+
   <header>
-    <div class="container nav">
-      <div class="brand">
-        <div class="logo">ა</div>
-        <div>
-          <div style="font-weight:700">აჭარა</div>
-          <div class="small">ისტორია • კულტურა • ძეგლები</div>
-        </div>
-      </div>
-
-      <nav>
-        <ul>
-          <li><a href="#intro">ზოგადი</a></li>
-          <li><a href="#etym">ეტიმოლოგია</a></li>
-          <li><a href="#descr">მხარის აღწერა</a></li>
-          <li><a href="#history">ისტორია</a></li>
-          <li><a href="#agri">სოფლის მეურნეობა</a></li>
-          <li><a href="#landmarks">ძეგლები</a></li>
-        </ul>
-      </nav>
-
-      <div style="display:flex;align-items:center;gap:12px">
-        <a class="cta" href="#landmarks">ძეგლები</a>
-        <button class="burger" id="burger" aria-label="მენიუ">
-          <svg width="28" height="18" viewBox="0 0 28 18"><rect width="28" height="2" rx="1" fill="#0f1724"/><rect y="8" width="28" height="2" rx="1" fill="#0f1724"/><rect y="16" width="28" height="2" rx="1" fill="#0f1724"/></svg>
-        </button>
-      </div>
-    </div>
-    <div class="mobile-menu" id="mobileMenu">
-      <a href="#intro" style="display:block;padding:8px 0">ზოგადი</a>
-      <a href="#etym" style="display:block;padding:8px 0">ეტიმოლოგია</a>
-      <a href="#descr" style="display:block;padding:8px 0">მხარის აღწერა</a>
-      <a href="#history" style="display:block;padding:8px 0">ისტორია</a>
-      <a href="#agri" style="display:block;padding:8px 0">სოფლის მეურნეობა</a>
-      <a href="#landmarks" style="display:block;padding:8px 0">ისტ. ძეგლები</a>
+    <div class="container nav-wrapper">
+      <a href="#" class="logo">
+        <span>A</span> აჭარა
+      </a>
+      <a href="https://ka.wikipedia.org/wiki/%E1%83%90%E1%83%AD%E1%83%90%E1%83%A0%E1%83%90" target="_blank" style="font-size:0.9rem; color:var(--primary); font-weight:600; text-decoration:none;">
+        ვიკიპედია &rarr;
+      </a>
     </div>
   </header>
 
+  <section class="hero">
+    <div class="container">
+      <h1>აღმოაჩინე აჭარა</h1>
+      <p>ისტორია, კულტურა და ბუნება — საქართველოს ულამაზესი კუთხის ინტერაქტიული გზამკვლევი.</p>
+    </div>
+  </section>
+
   <main class="container">
-    <section id="intro" class="hero">
-      <div>
-        <h1>აჭარა — მოკლე სახელმძღვანელო</h1>
-        <p class="muted">აჭარა — საქართველოს ისტორიულ-გეოგრაფიული მხარე. ფართობი: 1 873,4 კმ². ეს გვერდი ასახავს ვიკიპედიაზე არსებულ ცნობებს (იხილეთ წყარო ქვემოთ) და მათ მოკლე, კლასიკურ შეჯამებას.</p>
-
-        <div class="card" style="margin-top:12px">
-          <h3>წვერები</h3>
-          <p class="small">აჭარა მდებარეობს ჭოროხის აუზში და ისტორიულად იყოფა ზემო და ქვემო აჭარად. რეგიონს აქვს მდიდარი კულტურული და ბუნებრივი მემკვიდრეობა.</p>
-        </div>
+    
+    <h2 class="section-title">ზოგადი ინფორმაცია</h2>
+    <div class="grid">
+      <div class="card">
+        <div class="card-icon">📖</div>
+        <h3>ეტიმოლოგია</h3>
+        <p>საიდან მოდის სახელი „აჭარა“ და რას ნიშნავს ის ისტორიულ წყაროებში.</p>
+        <button class="btn btn-primary" onclick="openModal('etymology')">
+          <span>ნახვა</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+        </button>
+      </div>
+      
+      <div class="card">
+        <div class="card-icon">🏞️</div>
+        <h3>გეოგრაფია</h3>
+        <p>მდებარეობა, ჰავა, რელიეფი და ბუნებრივი რესურსები.</p>
+        <button class="btn btn-primary" onclick="openModal('geo')">
+          <span>ნახვა</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+        </button>
       </div>
 
-      <aside class="card">
-        <h3>ხაზგასმა</h3>
-        <p class="small">ამ გვერდზე პრიორიტეტული განყოფილებაა ისტორიული ძეგლები: ეკლესიები, მეჩეთები, ციხე-კოშკები, სასახლეები და ქვის ხიდები — ვიკიპედიაში თითოეულ ქვეკითხვას გეცოდინება სია და აღწერა.</p>
-      </aside>
-    </section>
-
-    <section id="etym">
-      <h2>ეტიმოლოგია</h2>
-      <p class="small">სახელწოდება "აჭარა" წყაროთი ცნობილია VII საუკუნიდან. არსებობს ვარაუდი, რომ იგი დაკავშირებულია გეოგრაფიულ სახელ "აჭი"-სთან და შეიძლება ნიშნავს "საჭანოს" ან "ჭანის" ტერიტორიას, რაც ბრალდებულია ისტორიულ წყაროებში.</p>
-    </section>
-
-    <section id="descr">
-      <h2>მხარის აღწერა</h2>
-      <p class="small">აჭარა მდებარეობს ჭოროხის ხეობაში. ისტორიულად ის იყო მესხეთის დანაყოფის ნაწილი. რეგიონი შედგება ვიწრო ხევებისა და მთიანი ზონებისგან; აქ არის ვენახები, ორნამენტული ტყეები, ხეები და მდინარეების სისტემები. აჭარა დაყოფილია ზემო და ქვემო ნაწილებად, რომლებმაც სხვადასხვა პერიოდში განსხვავებული ადმინისტრაციული ცენტრები ჰქონდათ (ძველად დიდაჭარა, ხიხანი, ხულო, ქედა და კ decreaed).</p>
-    </section>
-
-    <section id="history">
-      <h2>ისტორია</h2>
-      <div class="grid" style="margin-top:12px">
-        <div class="card">
-          <h3>მოკლე ქრონიკა</h3>
-          <p class="small">აჭარა მოხსენიებულია როგორც მნიშვნელოვანი ისტორიული რეგიონი — შუა საუკუნეებიდან დღემდე იგი ჰქონდა ადგილობრივი მმართველები და სანჯაყ-ბეგების სახეები. რეგიონს ჰქონდა სავაჭრო მნიშვნელობა და მნიშვნელოვანი გზები, რომლებიც აკავშირებდა მის ნაწილებს სხვა ქართული მხარეებთან.</p>
-        </div>
-        <div class="card">
-          <h3>ახალი ისტორია</h3>
-          <p class="small">ახალ ისტორიაში აჭარა განიცადა ადმინისტრაციული და სოციალურ-ეკონომიკური ცვლილებები, რაც დაკავშირებულია როგორც საქართველოს, ისე ოსარე განვითარებებთან.</p>
-        </div>
-        <div class="card">
-          <h3>ზემო და ქვემო აჭარა</h3>
-          <p class="small">ზემო აჭარა შედგება მთიანი უბნებისა და კლან-ბობოების გავლენის ზონებისგან; ქვემო აჭარა მოიცავს დაბლობ და საზღვაო ზონებს, სადაც განვითარებულია უფრო ინტენსიური სავაჭრო და სანაოსნო აქტივობები.</p>
-        </div>
+      <div class="card">
+        <div class="card-icon">⚔️</div>
+        <h3>ისტორია</h3>
+        <p>უძველესი დროიდან დღემდე: ოსმალობა, ბრძოლები და დაბრუნება.</p>
+        <button class="btn btn-primary" onclick="openModal('history')">
+          <span>ნახვა</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+        </button>
       </div>
-    </section>
+    </div>
 
-    <section id="agri">
-      <h2>სოფლის მეურნეობა</h2>
-      <p class="small">აჭარაში ფართოდ ნაწილდება მევენახეობა, მებაღეობა, ხვნა-თესვა, მესაქონლეობა, მეფუტკრეობა და მეთევზეობა. ზღვისპირა ზონებში მეთევზეობა მნიშვნელოვან ეკონომიკურ საქმიანობას წარმოადგენს, ხოლო მთიანეთში — მესაქონლეობა და ვენახები.</p>
-    </section>
-
-    <section id="landmarks">
-      <h2>ისტორიული ძეგლები (შეგროვებული)</h2>
-      <p class="small">ვიკიპედიის თანახმად, აჭარა მდიდარია სხვადასხვა კატეგორიის ძეგლებით. ქვემოთ მოყვანილია ძირითადი ჯგუფები და მცირე მაგალითები, რომლებსაც შეგიძლიათ შემდეგში მოიძიოთ დეტალურად ვიკიპედიაზე.</p>
-
-      <div class="landmarks">
-        <div class="card">
-          <h4>ეკლესიები</h4>
-          <p class="small">რეგიონში მრავლადაა ხალხმაცარი ეკლესიები — კოვზი, სამონასტრო კომპლექსები და პატარა სამლოცველოები, ბევრი მათგანი შუასაუკუნოვანი წარმოშობისაა.</p>
+    <h2 class="section-title">ისტორიული ძეგლები</h2>
+    <div class="grid">
+      <div class="card">
+        <div style="height:140px; background: linear-gradient(to bottom right, #556, #889); border-radius:12px; margin-bottom:15px; display:flex; align-items:center; justify-content:center; color:white;">
+          <span style="font-weight:bold; font-size:1.2rem;">გონიოს ციხე</span>
         </div>
-
-        <div class="card">
-          <h4>მეჩეთები</h4>
-          <p class="small">აჭარას აქვს მეჩეთების ისტორიული კვალი, განსაკუთრებით ქვემო აჭარაში, სადაც ოსმალეთის გავლენა უფრო თვალსაჩინოა.</p>
-        </div>
-
-        <div class="card">
-          <h4>ციხე-კოშკები</h4>
-          <p class="small">თავდაცვითი კოშკები და ციხეები — ადგილობრივი კლანების და საგამაგრებელი სტრუქტურების ნიმუშები.</p>
-        </div>
-
-        <div class="card">
-          <h4>სასახლეები</h4>
-          <p class="small">ბაზარზე მოქმედი არისტოკრატიული სახლ-მულახები და სასახლეები, რომლებიც წარმოადგენენ არქიტექტურული მემკვიდრეობის ნაწილს.</p>
-        </div>
-
-        <div class="card">
-          <h4>ქვის ხიდები</h4>
-          <p class="small">ისტორიული ქვისთაღოვანი ხიდები, რომლებიც გადადიან მცირე ხეობებსა და შაფრანებზე — ინჟინერიის და ხალხური მშენებლობის შედევრები.</p>
-        </div>
+        <h3>გონიო-აფსაროსი</h3>
+        <p>რომაული პერიოდის უძველესი ციხესიმაგრე.</p>
+        <button class="btn" onclick="openModal('gonio')">
+          ისტორიის წაკითხვა
+        </button>
       </div>
 
-      <p class="small" style="margin-top:12px">სრული და დეტალური სია თითოეული ქვეკითხისთვის ხელმისაწვდომია ვიკიპედიაზე — ეს არის მთავარი წყარო ამ გვერდის ჩასახვისთვის (საკონრეტო სურათები და ყოვლის დეტალები ადგილზე შეგიძლიათ ჩაამატოთ).</p>
-    </section>
+      <div class="card">
+        <div style="height:140px; background: linear-gradient(to bottom right, #5d4037, #8d6e63); border-radius:12px; margin-bottom:15px; display:flex; align-items:center; justify-content:center; color:white;">
+          <span style="font-weight:bold; font-size:1.2rem;">სხალთა</span>
+        </div>
+        <h3>სხალთის მონასტერი</h3>
+        <p>შუა საუკუნეების ქართული ხუროთმოძღვრების ძეგლი.</p>
+        <button class="btn" onclick="openModal('skhalta')">
+          ისტორიის წაკითხვა
+        </button>
+      </div>
 
-    <section style="padding-bottom:12px">
-      <h2>წყარო</h2>
-      <p class="small">ამ გვერდის ძირითადი ინფო ნაწილები მოყვანილია და მოკლედ გადმოყვანილია: <a href="https://ka.wikipedia.org/wiki/%E1%83%90%E1%83%AD%E1%83%90%E1%83%A0%E1%83%90" target="_blank" rel="noopener">ვიკიპედია — აჭარა (ქართული)</a>. თქვენი თხოვნის მიხედვით შემიძლია ვიკიპედიიდან დამატებით ამოვიღო კონკრეტული მიმდევრება და დავასახელო ზუსტი ძეგლები და მათი აღწერა (პირდაპირ html-ში).</p>
-    </section>
+      <div class="card">
+        <div style="height:140px; background: linear-gradient(to bottom right, #455a64, #78909c); border-radius:12px; margin-bottom:15px; display:flex; align-items:center; justify-content:center; color:white;">
+          <span style="font-weight:bold; font-size:1.2rem;">ქვის ხიდები</span>
+        </div>
+        <h3>თამარის ხიდები</h3>
+        <p>მახუნცეთი, დანდალო და სხვა თაღოვანი ხიდები.</p>
+        <button class="btn" onclick="openModal('bridges')">
+          ისტორიის წაკითხვა
+        </button>
+      </div>
+    </div>
 
   </main>
 
   <footer>
     <div class="container">
-      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
-        <div class="small">აღნიშნული გვერდის ძირითადი შინაარსი შედგენილია ვიკიპედიაზე დაფუძნებული მასალის მიხედვით.</div>
-        <div>© 2025 — აჭარის მიმოხილვა</div>
-      </div>
+      <p>მონაცემები დამუშავებულია ვიკიპედიის მასალებზე დაყრდნობით.</p>
+      <p style="font-size:0.8rem">© 2025 აჭარის გზამკვლევი</p>
     </div>
   </footer>
 
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-content">
+      <button class="close-modal" onclick="closeModal()">✕</button>
+      <div class="modal-header">
+        <h2 id="modalTitle">სათაური</h2>
+      </div>
+      <div class="modal-body" id="modalBody">
+        ტექსტი იტვირთება...
+      </div>
+    </div>
+  </div>
+
   <script>
-    const burger = document.getElementById('burger');
-    const mobileMenu = document.getElementById('mobileMenu');
-    burger.addEventListener('click', ()=> mobileMenu.classList.toggle('open'));
-    document.querySelectorAll('a[href^="#"]').forEach(a=>{
-      a.addEventListener('click', e=>{e.preventDefault();const id=a.getAttribute('href').slice(1);const el=document.getElementById(id);if(el){el.scrollIntoView({behavior:'smooth',block:'start'});mobileMenu.classList.remove('open')}})
+    // ვიკიპედიიდან დამუშავებული რეალური მონაცემები
+    const wikiData = {
+      etymology: `
+        <p>სახელწოდება <strong>„აჭარა“</strong> წყაროებში VII საუკუნიდან გვხვდება. არსებობს მოსაზრება, რომ იგი უკავშირდება გეოგრაფიულ სახელ „აჭი“-ს.</p>
+        <p>ვარაუდობენ, რომ ეს სახელი უკავშირდება <strong>„საჭანოს“</strong> (ჭანეთი), ვინაიდან ამ ტერიტორიაზე ისტორიულად ჭანური (ლაზური) მოსახლეობა ჭარბობდა. სახელი „აჭარა“ თავდაპირველად მხოლოდ ზემო აჭარას აღნიშნავდა, შემდგომში კი მთელ მხარეზე გავრცელდა.</p>
+      `,
+      geo: `
+        <p>აჭარა მდებარეობს საქართველოს სამხრეთ-დასავლეთ ნაწილში. მისი ფართობია <strong>2900 კვ. კმ</strong> (დაახლოებით). ტერიტორია ძირითადად მთიანია.</p>
+        <p>მთავარი მდინარეა <strong>ჭოროხი</strong>, რომელსაც შენაკადი აჭარისწყალი უერთდება. ჰავა ზღვისპირეთში ნოტიო სუბტროპიკულია, ხოლო მთაში — ნოტიო, ზამთარში თოვლიანი. ტერიტორიის დიდი ნაწილი დაფარულია უნიკალური ტყეებით (მტირალას ეროვნული პარკი, კინტრიში).</p>
+      `,
+      history: `
+        <p>ანტიკურ ხანაში აჭარა კოლხეთის სამეფოს ნაწილი იყო. მოგვიანებით ის ეგრისის (ლაზიკის) შემადგენლობაში შედიოდა.</p>
+        <p><strong>XVI საუკუნის</strong> მეორე ნახევარში ოსმალეთის იმპერიამ დაიპყრო, რის შემდეგაც დაიწყო მოსახლეობის ისლამიზაცია. 1878 წელს, რუსეთ-თურქეთის ომის შედეგად, აჭარა (ბათუმის ოლქი) საქართველოს (მაშინდელ რუსეთის იმპერიას) დაუბრუნდა.</p>
+        <p>1921 წლიდან ჩამოყალიბდა როგორც აჭარის ავტონომიური საბჭოთა სოციალისტური რესპუბლიკა.</p>
+      `,
+      gonio: `
+        <p><strong>გონიოს ციხე</strong> (იგივე აფსაროსი) — რომაული პერიოდის ციხესიმაგრე აჭარაში, მდინარე ჭოროხის შესართავთან.</p>
+        <p>ის იყო რომის იმპერიის სტრატეგიული ფორპოსტი აღმოსავლეთ შავიზღვისპირეთში. გადმოცემის თანახმად, სწორედ აქ არის დაკრძალული მათე მოციქული. ციხის ტერიტორიაზე არქეოლოგიური გათხრები დღემდე მიმდინარეობს.</p>
+      `,
+      skhalta: `
+        <p><strong>სხალთის ტაძარი</strong> — XII-XIII საუკუნეების ქართული ხუროთმოძღვრების ძეგლი ხულოს მუნიციპალიტეტში.</p>
+        <p>ეს არის ერთადერთი შუა საუკუნეების ეკლესია აჭარაში, რომელმაც პირვანდელი სახით მოაღწია. ეკლესია დარბაზული ტიპისაა და შემკულია უნიკალური ფრესკებით. ოსმალეთის ბატონობის პერიოდში ტაძარი მიტოვებული იყო, თუმცა ადგილობრივები მას მაინც იცავდნენ.</p>
+      `,
+      bridges: `
+        <p>აჭარაში შემორჩენილია შუა საუკუნეების მრავალი ქვისთაღოვანი ხიდი, რომლებსაც ხალხი ტრადიციულად <strong>„თამარის ხიდებს“</strong> უწოდებს.</p>
+        <p>ყველაზე ცნობილია <strong>მახუნცეთის ხიდი</strong> და <strong>დანდალოს ხიდი</strong>. ისინი აგებულია ვულკანური ქვისგან და კირის დუღაბით, რაც მათ საუკუნეების მანძილზე სიმყარეს სძენდა. ეს ხიდები მნიშვნელოვანი სავაჭრო გზების ნაწილი იყო.</p>
+      `
+    };
+
+    // მოდალის ლოგიკა
+    const modal = document.getElementById('modalOverlay');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalBody = document.getElementById('modalBody');
+
+    function openModal(key) {
+      // ამოვიღოთ ინფორმაცია მონაცემთა ბაზიდან
+      const content = wikiData[key];
+      
+      // სათაურის დაყენება (შესაბამისი გასაღების მიხედვით)
+      let titleText = "";
+      switch(key) {
+        case 'etymology': titleText = "ეტიმოლოგია"; break;
+        case 'geo': titleText = "გეოგრაფია და ბუნება"; break;
+        case 'history': titleText = "ისტორიული მიმოხილვა"; break;
+        case 'gonio': titleText = "გონიოს ციხე"; break;
+        case 'skhalta': titleText = "სხალთის მონასტერი"; break;
+        case 'bridges': titleText = "ქვის ხიდები"; break;
+        default: titleText = "ინფორმაცია";
+      }
+
+      modalTitle.innerText = titleText;
+      modalBody.innerHTML = content || "<p>ინფორმაცია არ მოიძებნა.</p>";
+      
+      // მოდალის გამოჩენა
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden'; // სქროლის გათიშვა უკანა ფონზე
+    }
+
+    function closeModal() {
+      modal.classList.remove('active');
+      document.body.style.overflow = ''; // სქროლის დაბრუნება
+    }
+
+    // მოდალის დახურვა გარეთ დაწკაპუნებით
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        closeModal();
+      }
     });
   </script>
 </body>
